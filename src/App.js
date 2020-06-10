@@ -1,26 +1,84 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import "./App.css";
+import PropTypes from 'prop-types';
+//install as separate module prop-types
+//built in type checking to validate props
+//array,bool,func,number,object,string,symbol
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+//props not passed at all ????
+// isRequired default
+
+//object with particular shape
+
+const Person=({info,img,name,age})=>{
+  return(
+    <article>
+      <img src={img} alt="person"/>
+      <h4>name : {name}</h4>
+      <h4>age: {age}</h4>
+      <h4>info: {info}</h4>
+    </article>
+  )
+}
+
+
+Person.propTypes={
+img: PropTypes.string.isRequired,
+name: PropTypes.string.isRequired,
+age: PropTypes.number.isRequired
+};
+
+
+
+Person.defaultProps={
+  img:"https://randomuser.me/api/portraits/thumb/men/71.jpg",
+  name:'doe',
+  age:35,
+  info:'default info about person'
+}
+
+class PersonList extends Component{
+ state={
+   people:[
+     {
+       id: 1,
+       img:"https://randomuser.me/api/portraits/thumb/men/75.jpg",
+       name: "john",
+       age:34
+    },
+    {
+      id: 2,
+      img: "https://randomuser.me/api/portraits/thumb/men/74.jpg",
+      name: "mark",
+      age:23,
+      info:"Some info about mark"
+   }
+   ]
+ }
+  render(){
+   return(
+     <section>
+     {this.state.people.map(person=>(
+       <Person 
+     key={person.id} 
+     img={person.img} 
+     name={person.name} 
+     age={person.age} />
+     ))}
+     </section>
+   )
+ }
+
+
+}
+class App extends Component {
+  render() {
+    return (
+      <h1><PersonList /></h1>
+    )
+
+  }
 }
 
 export default App;
