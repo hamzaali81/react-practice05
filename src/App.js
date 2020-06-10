@@ -6,6 +6,13 @@ import PropTypes from 'prop-types';
 //array,bool,func,number,object,string,symbol
 
 
+//controlled uncontrolled inputs
+//JS
+//const input =document.getElementById('myText');
+//const inputVslue =input.value
+//React
+//value, onChange
+
 //props not passed at all ????
 // isRequired default
 
@@ -20,26 +27,33 @@ return(
       <img src={img} alt="person"/>
       <h4>name : {name}</h4>
       <h4>age: {age}</h4>
-      <h4>info: {info}</h4>
+      <h4>info: {info || 'default info about the person'}</h4>
     </article>
   )
 }
 
 
 Person.propTypes={
-img: PropTypes.string.isRequired,
+person:PropTypes.shape({
+
+  img: PropTypes.string.isRequired,
 name: PropTypes.string.isRequired,
 age: PropTypes.number.isRequired,
 info:PropTypes.string.isRequired
+})
 };
 
 
 
 Person.defaultProps={
-  img:"https://randomuser.me/api/portraits/thumb/men/71.jpg",
-  name:'doe',
-  age:35,
-  info:'default info about person'
+  // img:"https://randomuser.me/api/portraits/thumb/men/71.jpg",
+  // name:'doe',
+  // age:35,
+  // info:'default info about person'
+Person:{
+  info: "default info about the person"
+}
+
 }
 
 class PersonList extends Component{
@@ -66,9 +80,10 @@ class PersonList extends Component{
      {this.state.people.map(person=>(
        <Person 
      key={person.id} 
-     img={person.img} 
-     name={person.name} 
-     age={person.age} />
+    //  img={person.img} 
+    //  name={person.name} 
+    //  age={person.age}
+    person={person} />
      ))}
      </section>
    )
