@@ -11,8 +11,11 @@ import PropTypes from 'prop-types';
 
 //object with particular shape
 
-const Person=({info,img,name,age})=>{
-  return(
+// const Person=({info,img,name,age})=>{
+  const Person=({person:{img,name,age,info}})=>{
+//  const {img,name,age,info}=props.person;
+console.log(info)
+return(
     <article>
       <img src={img} alt="person"/>
       <h4>name : {name}</h4>
@@ -26,7 +29,8 @@ const Person=({info,img,name,age})=>{
 Person.propTypes={
 img: PropTypes.string.isRequired,
 name: PropTypes.string.isRequired,
-age: PropTypes.number.isRequired
+age: PropTypes.number.isRequired,
+info:PropTypes.string.isRequired
 };
 
 
